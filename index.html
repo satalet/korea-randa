@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korea Randa - كورية ع الراندا</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Noto+Sans+KR:wght@500;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'randa-dark': '#0f172a',
+                        'randa-card': '#1e293b',
+                        'randa-pink': '#f472b6',
+                        'randa-teal': '#2dd4bf',
+                        'randa-green': '#4ade80',
+                        'randa-red': '#f87171'
+                    },
+                    fontFamily: {
+                        'korean': ['"Noto Sans KR"', 'sans-serif'],
+                        'arabic': ['Cairo', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neon-pink': '0 0 15px rgba(244, 114, 182, 0.5)',
+                        'neon-teal': '0 0 15px rgba(45, 212, 191, 0.5)',
+                        'neon-green': '0 0 15px rgba(74, 222, 128, 0.6)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; background-color: #0f172a; color: white; touch-action: manipulation; }
+        .korean-text { font-family: 'Noto Sans KR', sans-serif; }
+        @keyframes pulseSuccess { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+        .success-anim { animation: pulseSuccess 0.4s ease-in-out; }
+    </style>
+</head>
+<body class="p-4 md:p-8 max-w-2xl mx-auto min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="flex justify-between items-center pb-4 border-b border-gray-800">
+        <h1 class="text-2xl font-black text-randa-pink">Korea <span class="text-white">Randa</span> ✨</h1>
+        <div class="text-sm bg-randa-card px-3 py-1 rounded-full border border-gray-700">
+            أهلاً <span class="text-randa-teal font-bold">رنده</span> 🌸
+        </div>
+    </header>
+
+    <!-- 1. شاشة البداية -->
+    <div id="start-screen" class="text-center my-auto py-10">
+        
+        <!-- التوقيع الخاص باسم رندة الزربا فوق العلم -->
+        <div class="mb-3">
+            <span class="text-2xl md:text-3xl font-black text-randa-pink tracking-wider border-b-2 border-randa-teal pb-1 px-4 inline-block drop-shadow-md">
+                ✨ رندة الزربا ✨
+            </span>
+        </div>
+
+        <div class="text-7xl mb-4 mt-2">🇰🇷</div>
+        <h2 class="text-3xl font-black mb-3">جاهزة لتحدي اليوم؟</h2>
+        <p class="text-gray-400 mb-8">استماع، حفظ، وممارسة اختياري بكيبورد الكوري ⌨️</p>
+        
+        <div class="bg-randa-card p-6 rounded-3xl border border-randa-teal/30 shadow-neon-teal mb-8 inline-block w-full max-w-xs">
+            <span class="text-gray-400 text-sm">أنتِ حالياً في الدفعة:</span>
+            <div id="current-batch-display" class="text-6xl font-black text-randa-teal my-2 korean-text">1</div>
+            <span class="text-xs text-randa-pink">مستوى المبتدئين (TOPIK 1)</span>
+        </div>
+
+        <button onclick="startSession()" class="w-full bg-randa-pink text-randa-dark font-black py-4 rounded-2xl text-xl shadow-neon-pink hover:scale-105 transition-transform active:scale-95 cursor-pointer">
+            ابدأي التحدي الآن 🚀
+        </button>
+    </div>
+
+    <!-- 2. شاشة التفاعل والتعلم -->
+    <div id="learning-screen" class="hidden my-auto py-4">
+        <div class="flex justify-between items-center text-xs text-gray-400 mb-2">
+            <span>التقدم في الجلسة</span>
+            <span id="progress-text" class="text-randa-teal font-bold">1 / 15</span>
+        </div>
+        <div class="w-full bg-gray-800 rounded-full h-3 mb-6 overflow-hidden">
+            <div id="progress-bar" class="bg-randa-teal h-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+
+        <!-- كرت الكلمة -->
+        <div id="word-card" class="bg-randa-card p-6 rounded-3xl border border-gray-700 shadow-2xl text-center relative">
+            <button onclick="speakKorean()" class="absolute top-4 left-4 bg-gray-800/80 p-3 rounded-2xl text-randa-pink hover:text-white border border-gray-700 active:scale-95 transition-transform">
+                🔊 نطق
+            </button>
+
+            <h1 id="ko-word" class="korean-text text-5xl md:text-6xl font-black text-white my-4 tracking-wide">안녕하세요</h1>
+            <p id="ro-word" class="text-randa-teal font-mono text-lg mb-6">[ Annyeong-haseyo ]</p>
+            
+            <div id="ar-word-container" class="bg-gray-900/60 p-4 rounded-2xl border border-gray-800 mb-6">
+                <p id="ar-word" class="text-2xl font-bold text-gray-200">مرحباً / السلام عليكم</p>
+            </div>
+
+            <!-- خيار كتابة الكلمة بالكيبورد الكوري (اختياري) -->
+            <div class="bg-gray-900/40 p-4 rounded-2xl border border-gray-800 text-right">
+                <label for="type-input" class="block text-xs text-gray-400 mb-2 font-bold">
+                    ⌨️ جربي اكتبي الكلمة بالكوري (اختياري):
+                </label>
+                <input type="text" id="type-input" oninput="checkTyping()" placeholder="اكتبي الأحرف الكورية هون..." 
+                       class="w-full bg-randa-dark border border-gray-700 rounded-xl px-4 py-3 text-center text-xl font-bold text-randa-pink korean-text focus:outline-none focus:border-randa-teal transition-colors" dir="ltr">
+                <p id="feedback-msg" class="text-xs mt-2 text-center h-4 font-bold"></p>
+            </div>
+        </div>
+
+        <!-- زر الانتقال -->
+        <div class="mt-6">
+            <button id="next-btn" onclick="nextWord()" class="w-full bg-randa-pink text-randa-dark font-black py-4 rounded-2xl text-lg shadow-neon-pink hover:scale-102 active:scale-95 transition-transform">
+                الكلمة التالية ➡️
+            </button>
+        </div>
+    </div>
+
+    <!-- 3. شاشة الكويز النهائي -->
+    <div id="quiz-screen" class="hidden my-auto py-6">
+        <div class="text-center mb-6">
+            <span class="bg-randa-pink/20 text-randa-pink px-3 py-1 rounded-full text-xs font-bold">الاختبار النهائي للدفعة 📝</span>
+            <h2 class="text-2xl font-bold mt-2">ما هو معنى الكلمة التالية؟</h2>
+            <h1 id="quiz-ko-word" class="korean-text text-5xl font-black text-randa-teal my-4">밥</h1>
+        </div>
+
+        <div id="quiz-options" class="grid grid-cols-1 gap-3"></div>
+    </div>
+
+    <!-- 4. شاشة النهاية -->
+    <div id="end-screen" class="hidden text-center my-auto py-10">
+        <div class="text-8xl mb-4">👑</div>
+        <h2 class="text-3xl font-black text-randa-teal mb-2">أبدعتِ يا رنده!</h2>
+        <p class="text-gray-300 mb-6">أنشطتِ ذاكرتكِ وحفظتِ دُفعة اليوم كاملة!</p>
+        
+        <div class="bg-randa-card p-4 rounded-2xl border border-gray-800 mb-8 max-w-xs mx-auto">
+            <p class="text-xs text-gray-400">تم فتح الدفعة القادمة تلقائياً:</p>
+            <p class="text-2xl font-bold text-randa-pink mt-1">الدفعة رقم <span id="next-batch-num">2</span> 🔓</p>
+        </div>
+
+        <button onclick="backToStart()" class="w-full bg-randa-pink text-randa-dark font-black py-4 rounded-2xl text-lg shadow-neon-pink">
+            العودة للرئيسية 🏠
+        </button>
+    </div>
+
+    <script>
+        let allWords = [];
+        let currentBatch = 1;
+        let wordsInCurrentBatch = [];
+        let currentWordIndex = 0;
+
+        window.onload = async function() {
+            loadProgress();
+            await fetchWords();
+        }
+
+        function loadProgress() {
+            const savedBatch = localStorage.getItem('randa_ko_batch');
+            if (savedBatch) currentBatch = parseInt(savedBatch);
+            document.getElementById('current-batch-display').innerText = currentBatch;
+        }
+
+        async function fetchWords() {
+            try {
+                const response = await fetch('words.json');
+                if (response.ok) {
+                    allWords = await response.json();
+                }
+            } catch (e) {
+                console.error("خطأ في جلب الكلمات:", e);
+            }
+        }
+
+        function startSession() {
+            if (!allWords || allWords.length === 0) {
+                alert("لم يتم العثور على كلمات. تأكد من وجود ملف words.json");
+                return;
+            }
+
+            wordsInCurrentBatch = allWords.filter(w => w.batch === currentBatch);
+            
+            if (wordsInCurrentBatch.length === 0) {
+                currentBatch = 1;
+                localStorage.setItem('randa_ko_batch', currentBatch);
+                wordsInCurrentBatch = allWords.filter(w => w.batch === 1);
+            }
+
+            currentWordIndex = 0;
+            showScreen('learning');
+            renderWord();
+        }
+
+        function renderWord() {
+            const word = wordsInCurrentBatch[currentWordIndex];
+            document.getElementById('ko-word').innerText = word.hangul;
+            document.getElementById('ro-word').innerText = `[ ${word.roman} ]`;
+            document.getElementById('ar-word').innerText = word.arabic;
+            
+            document.getElementById('type-input').value = '';
+            document.getElementById('feedback-msg').innerText = '';
+
+            const progressPercent = ((currentWordIndex + 1) / wordsInCurrentBatch.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+            document.getElementById('progress-text').innerText = `${currentWordIndex + 1} / ${wordsInCurrentBatch.length}`;
+            
+            speakKorean();
+        }
+
+        function checkTyping() {
+            const input = document.getElementById('type-input').value.trim();
+            const currentWord = wordsInCurrentBatch[currentWordIndex];
+            const msg = document.getElementById('feedback-msg');
+
+            if (!input) {
+                msg.innerText = "";
+                return;
+            }
+
+            if (input === currentWord.hangul) {
+                msg.innerText = "✨ ممتازة! كتابة صحيحة 100%";
+                msg.className = "text-xs mt-2 text-center h-4 font-bold text-randa-green";
+                document.getElementById('word-card').classList.add('success-anim');
+                setTimeout(()=> document.getElementById('word-card').classList.remove('success-anim'), 500);
+            } else if (currentWord.hangul.startsWith(input)) {
+                msg.innerText = "⏳ كملي الكتابة...";
+                msg.className = "text-xs mt-2 text-center h-4 font-bold text-randa-teal";
+            } else {
+                msg.innerText = "❌ الكلمة مش مطابقة بالضبط، جربي ركبي الأحرف صح";
+                msg.className = "text-xs mt-2 text-center h-4 font-bold text-randa-red";
+            }
+        }
+
+        function nextWord() {
+            if (currentWordIndex < wordsInCurrentBatch.length - 1) {
+                currentWordIndex++;
+                renderWord();
+            } else {
+                startQuiz();
+            }
+        }
+
+        let currentQuizIndex = 0;
+        function startQuiz() {
+            showScreen('quiz');
+            currentQuizIndex = 0;
+            renderQuizQuestion();
+        }
+
+        function renderQuizQuestion() {
+            const word = wordsInCurrentBatch[currentQuizIndex];
+            document.getElementById('quiz-ko-word').innerText = word.hangul;
+
+            let options = [word.arabic];
+            while (options.length < 3 && allWords.length > 3) {
+                let randomWord = allWords[Math.floor(Math.random() * allWords.length)].arabic;
+                if (!options.includes(randomWord)) options.push(randomWord);
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "w-full bg-randa-card hover:bg-gray-700 text-white font-bold py-4 px-6 rounded-2xl border border-gray-700 text-right text-lg transition-all active:scale-98";
+                btn.innerText = opt;
+                btn.onclick = () => handleQuizAnswer(opt === word.arabic, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function handleQuizAnswer(isCorrect, btn) {
+            if (isCorrect) {
+                btn.classList.add('bg-randa-green', 'text-randa-dark', 'border-randa-green');
+                setTimeout(() => {
+                    currentQuizIndex++;
+                    if (currentQuizIndex < wordsInCurrentBatch.length) {
+                        renderQuizQuestion();
+                    } else {
+                        finishSession();
+                    }
+                }, 500);
+            } else {
+                btn.classList.add('bg-randa-red', 'text-white', 'border-randa-red');
+            }
+        }
+
+        function finishSession() {
+            currentBatch++;
+            localStorage.setItem('randa_ko_batch', currentBatch);
+            document.getElementById('next-batch-num').innerText = currentBatch;
+            document.getElementById('current-batch-display').innerText = currentBatch;
+            showScreen('end');
+        }
+
+        function speakKorean() {
+            const text = document.getElementById('ko-word').innerText;
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ko-KR';
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function backToStart() { showScreen('start'); }
+        function showScreen(name) {
+            ['start', 'learning', 'quiz', 'end'].forEach(s => {
+                const el = document.getElementById(`${s}-screen`);
+                if (el) el.classList.add('hidden');
+            });
+            const target = document.getElementById(`${name}-screen`);
+            if (target) target.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
