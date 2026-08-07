@@ -1,75 +1,68 @@
 import json
 
-# بنك الكلمات المعتمد (مقسم مجموعات 15 كلمة)
-dictionary_data = [
-    # --- الدفعة 1 (Batch 1) ---
-    {"hangul": "안녕하세요", "roman": "Annyeong-haseyo", "arabic": "مرحباً / السلام عليكم"},
-    {"hangul": "감사합니다", "roman": "Gamsa-hamnida", "arabic": "شكراً لك"},
-    {"hangul": "네", "roman": "Ne", "arabic": "نعم"},
-    {"hangul": "아니요", "roman": "Aniyo", "arabic": "لا"},
-    {"hangul": "사랑해요", "roman": "Sarang-haeyo", "arabic": "أحبك"},
-    {"hangul": "죄송합니다", "roman": "Joesong-hamnida", "arabic": "آسف"},
-    {"hangul": "괜찮아요", "roman": "Gwaenchana-yo", "arabic": "لا بأس / أنا بخير"},
-    {"hangul": "주세요", "roman": "Juseyo", "arabic": "أعطني من فضلك"},
-    {"hangul": "얼마예요?", "roman": "Eolmayeyo?", "arabic": "كم السعر؟"},
-    {"hangul": "어디예요?", "roman": "Eodiyeyo?", "arabic": "أين المكان؟"},
-    {"hangul": "맛있어요", "roman": "Masisseoyo", "arabic": "لذيذ"},
-    {"hangul": "도와주세요", "roman": "Dowajuseyo", "arabic": "ساعدني من فضلك"},
-    {"hangul": "안녕히 가세요", "roman": "Annyeonghi gaseyo", "arabic": "مع السلامة"},
-    {"hangul": "네, 맞아요", "roman": "Ne, majayo", "arabic": "نعم، هذا صحيح"},
-    {"hangul": "잠시만요", "roman": "Jamsimanyo", "arabic": "لحظة من فضلك"},
+# قاعدة بيانات الكلمات والجمل الكورية الموزعة على الدفعات والمستويات
+words_data = [
+    # ==========================================
+    # 🌱 مستوى المبتدئين (الدفعات 1 - 20)
+    # ==========================================
+    # الدفعة 1: التحيات والأساسيات
+    {"hangul": "안녕하세요", "roman": "Annyeong-haseyo", "arabic": "مرحباً / السلام عليكم", "batch": 1},
+    {"hangul": "감사합니다", "roman": "Gamsahabnida", "arabic": "شكراً لك", "batch": 1},
+    {"hangul": "네", "roman": "Ne", "arabic": "نعم", "batch": 1},
+    {"hangul": "아니요", "roman": "Aniyo", "arabic": "لا", "batch": 1},
+    {"hangul": "죄송합니다", "roman": "Joesonghabnida", "arabic": "آسف / اعتذار", "batch": 1},
 
-    # --- الدفعة 2 (Batch 2) ---
-    {"hangul": "물", "roman": "Mul", "arabic": "ماء"},
-    {"hangul": "밥", "roman": "Bap", "arabic": "أرز / طعام"},
-    {"hangul": "학교", "roman": "Hakgyo", "arabic": "مدرسة"},
-    {"hangul": "집", "roman": "Jip", "arabic": "بيت / منزل"},
-    {"hangul": "친구", "roman": "Chingu", "arabic": "صديق"},
-    {"hangul": "사람", "roman": "Saram", "arabic": "شخص / إنسان"},
-    {"hangul": "오늘", "roman": "Oneul", "arabic": "اليوم"},
-    {"hangul": "내일", "roman": "Naeil", "arabic": "غداً"},
-    {"hangul": "어제", "roman": "Eoje", "arabic": "أمس"},
-    {"hangul": "시간", "roman": "Sigan", "arabic": "وقت / ساعة"},
-    {"hangul": "돈", "roman": "Don", "arabic": "نقود / مصاري"},
-    {"hangul": "일", "roman": "Il", "arabic": "عمل / شغل"},
-    {"hangul": "한국", "roman": "Hanguk", "arabic": "كوريا"},
-    {"hangul": "언어", "roman": "Eoneo", "arabic": "لغة"},
-    {"hangul": "선생님", "roman": "Seonsaengnim", "arabic": "معلم / أستاذ"},
+    # الدفعة 2: الأشياء اليومية
+    {"hangul": "물", "roman": "Mul", "arabic": "ماء", "batch": 2},
+    {"hangul": "밥", "roman": "Bap", "arabic": "أرز / وجبة طعام", "batch": 2},
+    {"hangul": "집", "roman": "Jip", "arabic": "بيت / منزل", "batch": 2},
+    {"hangul": "학교", "roman": "Hakgyo", "arabic": "مدرسة", "batch": 2},
+    {"hangul": "친구", "roman": "Chingu", "arabic": "صديق / صديقة", "batch": 2},
 
-    # --- الدفعة 3 (Batch 3) ---
-    {"hangul": "가다", "roman": "Gada", "arabic": "يذهب"},
-    {"hangul": "오다", "roman": "Oda", "arabic": "يأتي"},
-    {"hangul": "먹다", "roman": "Meokda", "arabic": "يأكل"},
-    {"hangul": "마시다", "roman": "Masida", "arabic": "يشرب"},
-    {"hangul": "자다", "roman": "Jada", "arabic": "ينام"},
-    {"hangul": "보다", "roman": "Boda", "arabic": "يرى / يشاهد"},
-    {"hangul": "듣다", "roman": "Deutda", "arabic": "يسمع"},
-    {"hangul": "말하다", "roman": "Malhada", "arabic": "يتكلم"},
-    {"hangul": "읽다", "roman": "Ikda", "arabic": "يقرأ"},
-    {"hangul": "쓰다", "roman": "Sseuda", "arabic": "يكتب"},
-    {"hangul": "좋다", "roman": "Joh-da", "arabic": "جيد / جميل"},
-    {"hangul": "나쁘다", "roman": "Nappeuda", "arabic": "سيء"},
-    {"hangul": "크다", "roman": "Keuda", "arabic": "كبير"},
-    {"hangul": "작다", "roman": "Jakda", "arabic": "صغير"},
-    {"hangul": "행복", "roman": "Haengbok", "arabic": "سعادة"}
+    # الدفعة 3: الأطعمة والحيوانات
+    {"hangul": "사과", "roman": "Sagwa", "arabic": "تفاحة", "batch": 3},
+    {"hangul": "우유", "roman": "Uyu", "arabic": "حليب", "batch": 3},
+    {"hangul": "고양이", "roman": "Goyangi", "arabic": "قطة", "batch": 3},
+    {"hangul": "강아지", "roman": "Gangaji", "arabic": "كلب صغير", "batch": 3},
+    {"hangul": "책", "roman": "Chaek", "arabic": "كتاب", "batch": 3},
+
+    # ==========================================
+    # 🌿 مستوى المتوسط - جمل ومحادثات (الدفعات 21 - 50)
+    # ==========================================
+    # الدفعة 21: التسوق والمطاعم
+    {"hangul": "이것은 얼마예요?", "roman": "Igeoseun eolmayeyo?", "arabic": "كم سعر هذا؟", "batch": 21},
+    {"hangul": "화장실이 어디예요?", "roman": "Hwajangsiri eodiyeyo?", "arabic": "أين يقع الحمام؟", "batch": 21},
+    {"hangul": "메뉴판 주세요", "roman": "Menyupan juseyo", "arabic": "اعطني قائمة الطعام لو سمحت", "batch": 21},
+    {"hangul": "맛있어요!", "roman": "Masisseoyo!", "arabic": "هذا الطعام لديد جداً!", "batch": 21},
+    {"hangul": "깎아주세요", "roman": "Kkakkajuseyo", "arabic": "اعطني خصماً في السعر لو سمحت", "batch": 21},
+
+    # الدفعة 22: الوقت والطقس
+    {"hangul": "지금 몇 시예요?", "roman": "Jigeum myeot siyeyo?", "arabic": "كم الساعة الآن؟", "batch": 22},
+    {"hangul": "오늘 날씨가 좋아요", "roman": "Oneul nalssiga joayo", "arabic": "الطقس جميل هذا اليوم", "batch": 22},
+    {"hangul": "지하철역이 어디예요?", "roman": "Jihacheol-yeogi eodiyeyo?", "arabic": "أين تقع محطة القطار؟", "batch": 22},
+    {"hangul": "내일 만나요", "roman": "Naeil mannayo", "arabic": "نتقابل غداً", "batch": 22},
+    {"hangul": "도와주세요", "roman": "Dowajuseyo", "arabic": "ساعدني لو سمحت", "batch": 22},
+
+    # ==========================================
+    # 🌳 مستوى المتقدم - قواعد وتراكيب TOPIK 2 (الدفعات 51+)
+    # ==========================================
+    # الدفعة 51: التعبير عن الرأي والتخطيط
+    {"hangul": "한국어를 공부하는 것이 재미있어요", "roman": "Hangugoreul gongbuhaneun geosi jaemiisseoyo", "arabic": "تعلم اللغة الكورية ممتع جداً", "batch": 51},
+    {"hangul": "주말에 뭐 할 거예요?", "roman": "Jumare mwo hal geoyeyo?", "arabic": "ماذا ستفعل في عطلة نهاية الأسبوع؟", "batch": 51},
+    {"hangul": "걱정하지 마세요, 잘 될 거예요", "roman": "Geokjeonghaji maseyo, jal doel geoyeyo", "arabic": "لا تقلق، كل شيء سيكون على ما يرام", "batch": 51},
+    {"hangul": "시간이 있으면 같이 가요", "roman": "Sigani isseumyeon gathi gayo", "arabic": "إذا كان لديك وقت لنذهب معاً", "batch": 51},
+    {"hangul": "다시 한번 설명해 주시겠어요?", "roman": "Dasi hanbeon seolmyeonghae jusigesseoyo?", "arabic": "هل يمكنك إعادة الشرح مرة أخرى؟", "batch": 51}
 ]
 
-# معالجة وتقسيم الكلمات لدفعات من 15 كلمة تلقائياً
-formatted_words = []
-batch_size = 15
+def main():
+    # حفظ البيانات في ملف words.json مع تنسيق الأحرف الكورية
+    with open("words.json", "w", encoding="utf-8") as f:
+        json.dump(words_data, f, ensure_ascii=False, indent=2)
+    
+    batches = set(w["batch"] for w in words_data)
+    print(f"✅ تم تحديث ملف words.json بنجاح!")
+    print(f"📊 إجمالي العناصر: {len(words_data)} (كلمات وجمل ومحادثات)")
+    print(f"🎯 الدفعات المتوفرة حالياً: {sorted(list(batches))}")
 
-for index, word in enumerate(dictionary_data):
-    batch_num = (index // batch_size) + 1
-    formatted_words.append({
-        "id": index + 1,
-        "batch": batch_num,
-        "hangul": word["hangul"],
-        "roman": word["roman"],
-        "arabic": word["arabic"]
-    })
-
-# كتابة ملف words.json المحدث
-with open("words.json", "w", encoding="utf-8") as f:
-    json.dump(formatted_words, f, ensure_ascii=False, indent=2)
-
-print(f"✅ تم توليد ملف words.json بنجاح! إجمالي الكلمات: {len(formatted_words)} مقسمة على {formatted_words[-1]['batch']} دفعات.")
+if __name__ == "__main__":
+    main()

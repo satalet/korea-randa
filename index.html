@@ -70,31 +70,31 @@
         <h2 class="text-3xl font-black mb-2">جاهزة لتحدي اليوم؟</h2>
         <p class="text-gray-400 text-sm mb-6">استماع، حفظ، وممارسة اختياري بكيبورد الكوري ⌨️</p>
         
-        <!-- شاشة عرض الدفعة الحالية -->
+        <!-- شاشة عرض الدفعة الحالية والمستوى المحدث ديناميكياً -->
         <div class="bg-randa-card p-5 rounded-3xl border border-randa-teal/30 shadow-neon-teal mb-5 inline-block w-full max-w-xs">
             <span class="text-gray-400 text-xs">أنتِ حالياً في الدفعة:</span>
             <div id="current-batch-display" class="text-5xl font-black text-randa-teal my-1 korean-text">1</div>
-            <span class="text-xs text-randa-pink">مستوى المبتدئين (TOPIK 1)</span>
+            <span id="level-tag-display" class="text-xs text-randa-pink font-bold">🌱 مستوى المبتدئين (TOPIK 1 - L1)</span>
         </div>
 
-        <!-- اختيار المستوى / الدفعة للمستويات المتقدمة -->
+        <!-- اختيار المستوى / الانتقال بين المراحل والمرونة المرتقبة -->
         <div class="bg-randa-card/60 p-4 rounded-2xl border border-gray-800 mb-6 max-w-sm mx-auto text-right">
-            <label class="block text-xs text-gray-300 font-bold mb-2 text-center">🎯 اختر المستوى أو الدفعة للبدء منها:</label>
+            <label class="block text-xs text-gray-300 font-bold mb-2 text-center">🎯 القفز السريع لمستوى معين:</label>
             <div class="grid grid-cols-3 gap-2 mb-3">
-                <button onclick="selectLevel(1)" class="bg-randa-dark hover:border-randa-pink text-xs border border-gray-700 py-2 rounded-xl text-gray-200 font-bold focus:border-randa-pink focus:text-randa-pink transition-all">
-                    🌱 مبتدئ (1)
+                <button onclick="selectLevel(1)" class="bg-randa-dark hover:border-randa-pink text-xs border border-gray-700 py-2 rounded-xl text-gray-200 font-bold active:scale-95 transition-all">
+                    🌱 المبتدئ (1)
                 </button>
-                <button onclick="selectLevel(15)" class="bg-randa-dark hover:border-randa-teal text-xs border border-gray-700 py-2 rounded-xl text-gray-200 font-bold focus:border-randa-teal focus:text-randa-teal transition-all">
-                    🌿 متوسط (15)
+                <button onclick="selectLevel(21)" class="bg-randa-dark hover:border-randa-teal text-xs border border-gray-700 py-2 rounded-xl text-gray-200 font-bold active:scale-95 transition-all">
+                    🌿 المتوسط (21)
                 </button>
-                <button onclick="selectLevel(30)" class="bg-randa-dark hover:border-randa-green text-xs border border-gray-700 py-2 rounded-xl text-gray-200 font-bold focus:border-randa-green focus:text-randa-green transition-all">
-                    🌳 متقدم (30)
+                <button onclick="selectLevel(51)" class="bg-randa-dark hover:border-randa-green text-xs border border-gray-700 py-2 rounded-xl text-gray-200 font-bold active:scale-95 transition-all">
+                    🌳 المتقدم (51)
                 </button>
             </div>
-            <div class="flex items-center justify-center gap-2 text-xs pt-1 border-t border-gray-800/80">
-                <span class="text-gray-400">أو حددي رقم دفعة معين:</span>
-                <input type="number" id="custom-batch-input" min="1" max="100" placeholder="1" onchange="setCustomBatch(this.value)" 
-                       class="w-16 bg-randa-dark border border-gray-700 rounded-lg px-2 py-1 text-center font-bold text-randa-pink focus:outline-none focus:border-randa-teal">
+            <div class="flex items-center justify-center gap-2 text-xs pt-2 border-t border-gray-800/80">
+                <span class="text-gray-400">أو انتقلي فوراً لدفعة رقم:</span>
+                <input type="number" id="custom-batch-input" min="1" max="200" value="1" oninput="setCustomBatch(this.value)" 
+                       class="w-20 bg-randa-dark border border-gray-700 rounded-lg px-2 py-1 text-center font-bold text-randa-pink focus:outline-none focus:border-randa-teal">
             </div>
         </div>
 
@@ -113,26 +113,26 @@
             <div id="progress-bar" class="bg-randa-teal h-full transition-all duration-300" style="width: 0%"></div>
         </div>
 
-        <!-- كرت الكلمة -->
+        <!-- كرت الكلمة أو الجملة -->
         <div id="word-card" class="bg-randa-card p-6 rounded-3xl border border-gray-700 shadow-2xl text-center relative">
             <button onclick="speakKorean()" class="absolute top-4 left-4 bg-gray-800/80 p-3 rounded-2xl text-randa-pink hover:text-white border border-gray-700 active:scale-95 transition-transform">
                 🔊 نطق
             </button>
 
-            <h1 id="ko-word" class="korean-text text-5xl md:text-6xl font-black text-white my-4 tracking-wide">안녕하세요</h1>
-            <p id="ro-word" class="text-randa-teal font-mono text-lg mb-6">[ Annyeong-haseyo ]</p>
+            <h1 id="ko-word" class="korean-text text-4xl md:text-5xl font-black text-white my-4 tracking-wide leading-relaxed">안녕하세요</h1>
+            <p id="ro-word" class="text-randa-teal font-mono text-base mb-6">[ Annyeong-haseyo ]</p>
             
             <div id="ar-word-container" class="bg-gray-900/60 p-4 rounded-2xl border border-gray-800 mb-6">
                 <p id="ar-word" class="text-2xl font-bold text-gray-200">مرحباً / السلام عليكم</p>
             </div>
 
-            <!-- خيار كتابة الكلمة بالكيبورد الكوري (اختياري) -->
+            <!-- خيار كتابة النص بالكيبورد الكوري (اختياري) -->
             <div class="bg-gray-900/40 p-4 rounded-2xl border border-gray-800 text-right">
                 <label for="type-input" class="block text-xs text-gray-400 mb-2 font-bold">
-                    ⌨️ جربي اكتبي الكلمة بالكوري (اختياري):
+                    ⌨️ جربي اكتبي النص بالكوري (اختياري):
                 </label>
                 <input type="text" id="type-input" oninput="checkTyping()" placeholder="اكتبي الأحرف الكورية هون..." 
-                       class="w-full bg-randa-dark border border-gray-700 rounded-xl px-4 py-3 text-center text-xl font-bold text-randa-pink korean-text focus:outline-none focus:border-randa-teal transition-colors" dir="ltr">
+                       class="w-full bg-randa-dark border border-gray-700 rounded-xl px-4 py-3 text-center text-lg font-bold text-randa-pink korean-text focus:outline-none focus:border-randa-teal transition-colors" dir="ltr">
                 <p id="feedback-msg" class="text-xs mt-2 text-center h-4 font-bold"></p>
             </div>
         </div>
@@ -140,7 +140,7 @@
         <!-- زر الانتقال -->
         <div class="mt-6">
             <button id="next-btn" onclick="nextWord()" class="w-full bg-randa-pink text-randa-dark font-black py-4 rounded-2xl text-lg shadow-neon-pink hover:scale-102 active:scale-95 transition-transform">
-                الكلمة التالية ➡️
+                التالي ➡️
             </button>
         </div>
     </div>
@@ -149,8 +149,8 @@
     <div id="quiz-screen" class="hidden my-auto py-6">
         <div class="text-center mb-6">
             <span class="bg-randa-pink/20 text-randa-pink px-3 py-1 rounded-full text-xs font-bold">الاختبار النهائي للدفعة 📝</span>
-            <h2 class="text-2xl font-bold mt-2">ما هو معنى الكلمة التالية؟</h2>
-            <h1 id="quiz-ko-word" class="korean-text text-5xl font-black text-randa-teal my-4">밥</h1>
+            <h2 class="text-2xl font-bold mt-2">ما هو المعنى الصحيح؟</h2>
+            <h1 id="quiz-ko-word" class="korean-text text-4xl md:text-5xl font-black text-randa-teal my-4 leading-relaxed">밥</h1>
         </div>
 
         <div id="quiz-options" class="grid grid-cols-1 gap-3"></div>
@@ -160,7 +160,7 @@
     <div id="end-screen" class="hidden text-center my-auto py-10">
         <div class="text-8xl mb-4">👑</div>
         <h2 class="text-3xl font-black text-randa-teal mb-2">أبدعتِ يا رنده!</h2>
-        <p class="text-gray-300 mb-6">أنشطتِ ذاكرتكِ وحفظتِ دُفعة اليوم كاملة!</p>
+        <p class="text-gray-300 mb-6">أنشطتِ ذاكرتكِ وأتقنتِ دُفعة اليوم بنجاح!</p>
         
         <div class="bg-randa-card p-4 rounded-2xl border border-gray-800 mb-8 max-w-xs mx-auto">
             <p class="text-xs text-gray-400">تم فتح الدفعة القادمة تلقائياً:</p>
@@ -200,18 +200,40 @@
             checkPWAStatus();
         }
 
+        function updateLevelTag(batchNum) {
+            const tag = document.getElementById('level-tag-display');
+            if (!tag) return;
+            
+            if (batchNum <= 20) {
+                tag.innerText = "🌱 مستوى المبتدئين (TOPIK 1 - L1)";
+                tag.className = "text-xs text-randa-pink font-bold";
+            } else if (batchNum <= 50) {
+                tag.innerText = "🌿 مستوى المتوسط - جمل ومحادثات (TOPIK 1 - L2)";
+                tag.className = "text-xs text-randa-teal font-bold";
+            } else {
+                tag.innerText = "🌳 مستوى المتقدم - قواعد ومفردات TOPIK 2";
+                tag.className = "text-xs text-randa-green font-bold";
+            }
+        }
+
         function selectLevel(batchNum) {
             currentBatch = parseInt(batchNum);
-            localStorage.setItem('randa_ko_batch', currentBatch);
-            document.getElementById('current-batch-display').innerText = currentBatch;
-            document.getElementById('custom-batch-input').value = currentBatch;
+            saveAndRefreshBatch();
         }
 
         function setCustomBatch(val) {
             let num = parseInt(val);
             if (num && num > 0) {
-                selectLevel(num);
+                currentBatch = num;
+                saveAndRefreshBatch();
             }
+        }
+
+        function saveAndRefreshBatch() {
+            localStorage.setItem('randa_ko_batch', currentBatch);
+            document.getElementById('current-batch-display').innerText = currentBatch;
+            document.getElementById('custom-batch-input').value = currentBatch;
+            updateLevelTag(currentBatch);
         }
 
         // PWA Installation Handling
@@ -257,8 +279,7 @@
         function loadProgress() {
             const savedBatch = localStorage.getItem('randa_ko_batch');
             if (savedBatch) currentBatch = parseInt(savedBatch);
-            document.getElementById('current-batch-display').innerText = currentBatch;
-            document.getElementById('custom-batch-input').value = currentBatch;
+            saveAndRefreshBatch();
         }
 
         async function fetchWords() {
@@ -268,22 +289,22 @@
                     allWords = await response.json();
                 }
             } catch (e) {
-                console.error("خطأ في جلب الكلمات:", e);
+                console.error("خطأ في جلب البيانات:", e);
             }
         }
 
         function startSession() {
             if (!allWords || allWords.length === 0) {
-                alert("لم يتم العثور على كلمات. تأكد من وجود ملف words.json");
+                alert("لم يتم العثور على بيانات. تأكد من وجود ملف words.json");
                 return;
             }
 
             wordsInCurrentBatch = allWords.filter(w => w.batch === currentBatch);
             
             if (wordsInCurrentBatch.length === 0) {
-                alert(`الدفعة رقم (${currentBatch}) غير متوفرة بعد بملف الكلمات، تم تحويلك لأقرب دفعة متوفرة.`);
+                alert(`الدفعة رقم (${currentBatch}) غير متوفرة بعد بملف البيانات، تم تحويلك لأقرب دفعة متوفرة.`);
                 currentBatch = 1;
-                localStorage.setItem('randa_ko_batch', currentBatch);
+                saveAndRefreshBatch();
                 wordsInCurrentBatch = allWords.filter(w => w.batch === 1);
             }
 
@@ -319,7 +340,7 @@
             }
 
             if (input === currentWord.hangul) {
-                msg.innerText = "✨ ممتازة! كتابة صحيحة 100%";
+                msg.innerText = "✨ ممتازة! إجابة صحيحة 100%";
                 msg.className = "text-xs mt-2 text-center h-4 font-bold text-randa-green";
                 document.getElementById('word-card').classList.add('success-anim');
                 setTimeout(()=> document.getElementById('word-card').classList.remove('success-anim'), 500);
@@ -327,7 +348,7 @@
                 msg.innerText = "⏳ كملي الكتابة...";
                 msg.className = "text-xs mt-2 text-center h-4 font-bold text-randa-teal";
             } else {
-                msg.innerText = "❌ الكلمة مش مطابقة بالضبط، جربي ركبي الأحرف صح";
+                msg.innerText = "❌ غيـر مطابق بالضبط، جربي ركبي الأحرف صح";
                 msg.className = "text-xs mt-2 text-center h-4 font-bold text-randa-red";
             }
         }
@@ -388,10 +409,8 @@
 
         function finishSession() {
             currentBatch++;
-            localStorage.setItem('randa_ko_batch', currentBatch);
+            saveAndRefreshBatch();
             document.getElementById('next-batch-num').innerText = currentBatch;
-            document.getElementById('current-batch-display').innerText = currentBatch;
-            document.getElementById('custom-batch-input').value = currentBatch;
             showScreen('end');
         }
 

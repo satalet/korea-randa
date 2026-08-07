@@ -1,317 +1,182 @@
 [
   {
-    "id": 1,
-    "batch": 1,
     "hangul": "안녕하세요",
     "roman": "Annyeong-haseyo",
-    "arabic": "مرحباً / السلام عليكم"
+    "arabic": "مرحباً / السلام عليكم",
+    "batch": 1
   },
   {
-    "id": 2,
-    "batch": 1,
     "hangul": "감사합니다",
-    "roman": "Gamsa-hamnida",
-    "arabic": "شكراً لك"
+    "roman": "Gamsahabnida",
+    "arabic": "شكراً لك",
+    "batch": 1
   },
   {
-    "id": 3,
-    "batch": 1,
     "hangul": "네",
     "roman": "Ne",
-    "arabic": "نعم"
+    "arabic": "نعم",
+    "batch": 1
   },
   {
-    "id": 4,
-    "batch": 1,
     "hangul": "아니요",
     "roman": "Aniyo",
-    "arabic": "لا"
+    "arabic": "لا",
+    "batch": 1
   },
   {
-    "id": 5,
-    "batch": 1,
-    "hangul": "사랑해요",
-    "roman": "Sarang-haeyo",
-    "arabic": "أحبك"
-  },
-  {
-    "id": 6,
-    "batch": 1,
     "hangul": "죄송합니다",
-    "roman": "Joesong-hamnida",
-    "arabic": "آسف"
+    "roman": "Joesonghabnida",
+    "arabic": "آسف / اعتذار",
+    "batch": 1
   },
   {
-    "id": 7,
-    "batch": 1,
-    "hangul": "괜찮아요",
-    "roman": "Gwaenchana-yo",
-    "arabic": "لا بأس / أنا بخير"
-  },
-  {
-    "id": 8,
-    "batch": 1,
-    "hangul": "주세요",
-    "roman": "Juseyo",
-    "arabic": "أعطني من فضلك"
-  },
-  {
-    "id": 9,
-    "batch": 1,
-    "hangul": "얼마예요?",
-    "roman": "Eolmayeyo?",
-    "arabic": "كم السعر؟"
-  },
-  {
-    "id": 10,
-    "batch": 1,
-    "hangul": "어디예요?",
-    "roman": "Eodiyeyo?",
-    "arabic": "أين المكان؟"
-  },
-  {
-    "id": 11,
-    "batch": 1,
-    "hangul": "맛있어요",
-    "roman": "Masisseoyo",
-    "arabic": "لذيذ"
-  },
-  {
-    "id": 12,
-    "batch": 1,
-    "hangul": "도와주세요",
-    "roman": "Dowajuseyo",
-    "arabic": "ساعدني من فضلك"
-  },
-  {
-    "id": 13,
-    "batch": 1,
-    "hangul": "안녕히 가세요",
-    "roman": "Annyeonghi gaseyo",
-    "arabic": "مع السلامة"
-  },
-  {
-    "id": 14,
-    "batch": 1,
-    "hangul": "네, 맞아요",
-    "roman": "Ne, majayo",
-    "arabic": "نعم، هذا صحيح"
-  },
-  {
-    "id": 15,
-    "batch": 1,
-    "hangul": "잠시만요",
-    "roman": "Jamsimanyo",
-    "arabic": "لحظة من فضلك"
-  },
-  {
-    "id": 16,
-    "batch": 2,
     "hangul": "물",
     "roman": "Mul",
-    "arabic": "ماء"
+    "arabic": "ماء",
+    "batch": 2
   },
   {
-    "id": 17,
-    "batch": 2,
     "hangul": "밥",
     "roman": "Bap",
-    "arabic": "أرز / طعام"
+    "arabic": "أرز / وجبة طعام",
+    "batch": 2
   },
   {
-    "id": 18,
-    "batch": 2,
-    "hangul": "학교",
-    "roman": "Hakgyo",
-    "arabic": "مدرسة"
-  },
-  {
-    "id": 19,
-    "batch": 2,
     "hangul": "집",
     "roman": "Jip",
-    "arabic": "بيت / منزل"
+    "arabic": "بيت / منزل",
+    "batch": 2
   },
   {
-    "id": 20,
-    "batch": 2,
+    "hangul": "학교",
+    "roman": "Hakgyo",
+    "arabic": "مدرسة",
+    "batch": 2
+  },
+  {
     "hangul": "친구",
     "roman": "Chingu",
-    "arabic": "صديق"
+    "arabic": "صديق / صديقة",
+    "batch": 2
   },
   {
-    "id": 21,
-    "batch": 2,
-    "hangul": "사람",
-    "roman": "Saram",
-    "arabic": "شخص / إنسان"
+    "hangul": "사과",
+    "roman": "Sagwa",
+    "arabic": "تفاحة",
+    "batch": 3
   },
   {
-    "id": 22,
-    "batch": 2,
-    "hangul": "오늘",
-    "roman": "Oneul",
-    "arabic": "اليوم"
+    "hangul": "우유",
+    "roman": "Uyu",
+    "arabic": "حليب",
+    "batch": 3
   },
   {
-    "id": 23,
-    "batch": 2,
-    "hangul": "내일",
-    "roman": "Naeil",
-    "arabic": "غداً"
+    "hangul": "고양이",
+    "roman": "Goyangi",
+    "arabic": "قطة",
+    "batch": 3
   },
   {
-    "id": 24,
-    "batch": 2,
-    "hangul": "어제",
-    "roman": "Eoje",
-    "arabic": "أمس"
+    "hangul": "강아지",
+    "roman": "Gangaji",
+    "arabic": "كلب صغير",
+    "batch": 3
   },
   {
-    "id": 25,
-    "batch": 2,
-    "hangul": "시간",
-    "roman": "Sigan",
-    "arabic": "وقت / ساعة"
+    "hangul": "책",
+    "roman": "Chaek",
+    "arabic": "كتاب",
+    "batch": 3
   },
   {
-    "id": 26,
-    "batch": 2,
-    "hangul": "돈",
-    "roman": "Don",
-    "arabic": "نقود / مصاري"
+    "hangul": "이것은 얼마예요?",
+    "roman": "Igeoseun eolmayeyo?",
+    "arabic": "كم سعر هذا؟",
+    "batch": 21
   },
   {
-    "id": 27,
-    "batch": 2,
-    "hangul": "일",
-    "roman": "Il",
-    "arabic": "عمل / شغل"
+    "hangul": "화장실이 어디예요?",
+    "roman": "Hwajangsiri eodiyeyo?",
+    "arabic": "أين يقع الحمام؟",
+    "batch": 21
   },
   {
-    "id": 28,
-    "batch": 2,
-    "hangul": "한국",
-    "roman": "Hanguk",
-    "arabic": "كوريا"
+    "hangul": "메뉴판 주세요",
+    "roman": "Menyupan juseyo",
+    "arabic": "اعطني قائمة الطعام لو سمحت",
+    "batch": 21
   },
   {
-    "id": 29,
-    "batch": 2,
-    "hangul": "언어",
-    "roman": "Eoneo",
-    "arabic": "لغة"
+    "hangul": "맛있어요!",
+    "roman": "Masisseoyo!",
+    "arabic": "هذا الطعام لديد جداً!",
+    "batch": 21
   },
   {
-    "id": 30,
-    "batch": 2,
-    "hangul": "선생님",
-    "roman": "Seonsaengnim",
-    "arabic": "معلم / أستاذ"
+    "hangul": "깎아주세요",
+    "roman": "Kkakkajuseyo",
+    "arabic": "اعطني خصماً في السعر لو سمحت",
+    "batch": 21
   },
   {
-    "id": 31,
-    "batch": 3,
-    "hangul": "가다",
-    "roman": "Gada",
-    "arabic": "يذهب"
+    "hangul": "지금 몇 시예요?",
+    "roman": "Jigeum myeot siyeyo?",
+    "arabic": "كم الساعة الآن؟",
+    "batch": 22
   },
   {
-    "id": 32,
-    "batch": 3,
-    "hangul": "오다",
-    "roman": "Oda",
-    "arabic": "يأتي"
+    "hangul": "오늘 날씨가 좋아요",
+    "roman": "Oneul nalssiga joayo",
+    "arabic": "الطقس جميل هذا اليوم",
+    "batch": 22
   },
   {
-    "id": 33,
-    "batch": 3,
-    "hangul": "먹다",
-    "roman": "Meokda",
-    "arabic": "يأكل"
+    "hangul": "지하철역이 어디예요?",
+    "roman": "Jihacheol-yeogi eodiyeyo?",
+    "arabic": "أين تقع محطة القطار؟",
+    "batch": 22
   },
   {
-    "id": 34,
-    "batch": 3,
-    "hangul": "마시다",
-    "roman": "Masida",
-    "arabic": "يشرب"
+    "hangul": "내일 만나요",
+    "roman": "Naeil mannayo",
+    "arabic": "نتقابل غداً",
+    "batch": 22
   },
   {
-    "id": 35,
-    "batch": 3,
-    "hangul": "자다",
-    "roman": "Jada",
-    "arabic": "ينام"
+    "hangul": "도와주세요",
+    "roman": "Dowajuseyo",
+    "arabic": "ساعدني لو سمحت",
+    "batch": 22
   },
   {
-    "id": 36,
-    "batch": 3,
-    "hangul": "보다",
-    "roman": "Boda",
-    "arabic": "يرى / يشاهد"
+    "hangul": "한국어를 공부하는 것이 재미있어요",
+    "roman": "Hangugoreul gongbuhaneun geosi jaemiisseoyo",
+    "arabic": "تعلم اللغة الكورية ممتع جداً",
+    "batch": 51
   },
   {
-    "id": 37,
-    "batch": 3,
-    "hangul": "듣다",
-    "roman": "Deutda",
-    "arabic": "يسمع"
+    "hangul": "주말에 뭐 할 거예요?",
+    "roman": "Jumare mwo hal geoyeyo?",
+    "arabic": "ماذا ستفعل في عطلة نهاية الأسبوع؟",
+    "batch": 51
   },
   {
-    "id": 38,
-    "batch": 3,
-    "hangul": "말하다",
-    "roman": "Malhada",
-    "arabic": "يتكلم"
+    "hangul": "걱정하지 마세요, 잘 될 거예요",
+    "roman": "Geokjeonghaji maseyo, jal doel geoyeyo",
+    "arabic": "لا تقلق، كل شيء سيكون على ما يرام",
+    "batch": 51
   },
   {
-    "id": 39,
-    "batch": 3,
-    "hangul": "읽다",
-    "roman": "Ikda",
-    "arabic": "يقرأ"
+    "hangul": "시간이 있으면 같이 가요",
+    "roman": "Sigani isseumyeon gathi gayo",
+    "arabic": "إذا كان لديك وقت لنذهب معاً",
+    "batch": 51
   },
   {
-    "id": 40,
-    "batch": 3,
-    "hangul": "쓰다",
-    "roman": "Sseuda",
-    "arabic": "يكتب"
-  },
-  {
-    "id": 41,
-    "batch": 3,
-    "hangul": "좋다",
-    "roman": "Joh-da",
-    "arabic": "جيد / جميل"
-  },
-  {
-    "id": 42,
-    "batch": 3,
-    "hangul": "나쁘다",
-    "roman": "Nappeuda",
-    "arabic": "سيء"
-  },
-  {
-    "id": 43,
-    "batch": 3,
-    "hangul": "크다",
-    "roman": "Keuda",
-    "arabic": "كبير"
-  },
-  {
-    "id": 44,
-    "batch": 3,
-    "hangul": "작다",
-    "roman": "Jakda",
-    "arabic": "صغير"
-  },
-  {
-    "id": 45,
-    "batch": 3,
-    "hangul": "행복",
-    "roman": "Haengbok",
-    "arabic": "سعادة"
+    "hangul": "다시 한번 설명해 주시겠어요?",
+    "roman": "Dasi hanbeon seolmyeonghae jusigesseoyo?",
+    "arabic": "هل يمكنك إعادة الشرح مرة أخرى؟",
+    "batch": 51
   }
 ]
