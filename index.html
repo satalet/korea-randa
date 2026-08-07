@@ -57,23 +57,45 @@
     </header>
 
     <!-- 1. شاشة البداية -->
-    <div id="start-screen" class="text-center my-auto py-10">
+    <div id="start-screen" class="text-center my-auto py-6">
         
         <!-- التوقيع الخاص باسم رندة الزربا فوق العلم -->
-        <div class="mb-3">
+        <div class="mb-2">
             <span class="text-2xl md:text-3xl font-black text-randa-pink tracking-wider border-b-2 border-randa-teal pb-1 px-4 inline-block drop-shadow-md">
                 ✨ رندة الزربا ✨
             </span>
         </div>
 
-        <div class="text-7xl mb-4 mt-2">🇰🇷</div>
-        <h2 class="text-3xl font-black mb-3">جاهزة لتحدي اليوم؟</h2>
-        <p class="text-gray-400 mb-8">استماع، حفظ، وممارسة اختياري بكيبورد الكوري ⌨️</p>
+        <div class="text-6xl mb-3 mt-1">🇰🇷</div>
+        <h2 class="text-3xl font-black mb-2">جاهزة لتحدي اليوم؟</h2>
+        <p class="text-gray-400 text-sm mb-6">استماع، حفظ، وممارسة اختياري بكيبورد الكوري ⌨️</p>
         
-        <div class="bg-randa-card p-6 rounded-3xl border border-randa-teal/30 shadow-neon-teal mb-8 inline-block w-full max-w-xs">
-            <span class="text-gray-400 text-sm">أنتِ حالياً في الدفعة:</span>
-            <div id="current-batch-display" class="text-6xl font-black text-randa-teal my-2 korean-text">1</div>
+        <!-- شاشة عرض الدفعة الحالية -->
+        <div class="bg-randa-card p-5 rounded-3xl border border-randa-teal/30 shadow-neon-teal mb-5 inline-block w-full max-w-xs">
+            <span class="text-gray-400 text-xs">أنتِ حالياً في الدفعة:</span>
+            <div id="current-batch-display" class="text-5xl font-black text-randa-teal my-1 korean-text">1</div>
             <span class="text-xs text-randa-pink">مستوى المبتدئين (TOPIK 1)</span>
+        </div>
+
+        <!-- اختيار المستوى / الدفعة للمستويات المتقدمة -->
+        <div class="bg-randa-card/60 p-4 rounded-2xl border border-gray-800 mb-6 max-w-sm mx-auto text-right">
+            <label class="block text-xs text-gray-300 font-bold mb-2 text-center">🎯 اختر المستوى أو الدفعة للبدء منها:</label>
+            <div class="grid grid-cols-3 gap-2 mb-3">
+                <button onclick="selectLevel(1)" class="bg-randa-dark hover:border-randa-pink text-xs border border-gray-700 py-2 rounded-xl text-gray-200 font-bold focus:border-randa-pink focus:text-randa-pink transition-all">
+                    🌱 مبتدئ (1)
+                </button>
+                <button onclick="selectLevel(15)" class="bg-randa-dark hover:border-randa-teal text-xs border border-gray-700 py-2 rounded-xl text-gray-200 font-bold focus:border-randa-teal focus:text-randa-teal transition-all">
+                    🌿 متوسط (15)
+                </button>
+                <button onclick="selectLevel(30)" class="bg-randa-dark hover:border-randa-green text-xs border border-gray-700 py-2 rounded-xl text-gray-200 font-bold focus:border-randa-green focus:text-randa-green transition-all">
+                    🌳 متقدم (30)
+                </button>
+            </div>
+            <div class="flex items-center justify-center gap-2 text-xs pt-1 border-t border-gray-800/80">
+                <span class="text-gray-400">أو حددي رقم دفعة معين:</span>
+                <input type="number" id="custom-batch-input" min="1" max="100" placeholder="1" onchange="setCustomBatch(this.value)" 
+                       class="w-16 bg-randa-dark border border-gray-700 rounded-lg px-2 py-1 text-center font-bold text-randa-pink focus:outline-none focus:border-randa-teal">
+            </div>
         </div>
 
         <button onclick="startSession()" class="w-full bg-randa-pink text-randa-dark font-black py-4 rounded-2xl text-xl shadow-neon-pink hover:scale-105 transition-transform active:scale-95 cursor-pointer">
@@ -178,6 +200,20 @@
             checkPWAStatus();
         }
 
+        function selectLevel(batchNum) {
+            currentBatch = parseInt(batchNum);
+            localStorage.setItem('randa_ko_batch', currentBatch);
+            document.getElementById('current-batch-display').innerText = currentBatch;
+            document.getElementById('custom-batch-input').value = currentBatch;
+        }
+
+        function setCustomBatch(val) {
+            let num = parseInt(val);
+            if (num && num > 0) {
+                selectLevel(num);
+            }
+        }
+
         // PWA Installation Handling
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
@@ -222,6 +258,7 @@
             const savedBatch = localStorage.getItem('randa_ko_batch');
             if (savedBatch) currentBatch = parseInt(savedBatch);
             document.getElementById('current-batch-display').innerText = currentBatch;
+            document.getElementById('custom-batch-input').value = currentBatch;
         }
 
         async function fetchWords() {
@@ -244,6 +281,7 @@
             wordsInCurrentBatch = allWords.filter(w => w.batch === currentBatch);
             
             if (wordsInCurrentBatch.length === 0) {
+                alert(`الدفعة رقم (${currentBatch}) غير متوفرة بعد بملف الكلمات، تم تحويلك لأقرب دفعة متوفرة.`);
                 currentBatch = 1;
                 localStorage.setItem('randa_ko_batch', currentBatch);
                 wordsInCurrentBatch = allWords.filter(w => w.batch === 1);
@@ -353,6 +391,7 @@
             localStorage.setItem('randa_ko_batch', currentBatch);
             document.getElementById('next-batch-num').innerText = currentBatch;
             document.getElementById('current-batch-display').innerText = currentBatch;
+            document.getElementById('custom-batch-input').value = currentBatch;
             showScreen('end');
         }
 
