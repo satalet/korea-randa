@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Korea Randa - كورية ع الراندا</title>
     
-    <!-- PWA / Mobile Meta Tags -->
+    <!-- PWA / Mobile Meta Tags & Manifest Link -->
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f172a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -59,7 +60,6 @@
     <!-- 1. شاشة البداية -->
     <div id="start-screen" class="text-center my-auto py-6">
         
-        <!-- التوقيع الخاص باسم رندة الزربا فوق العلم -->
         <div class="mb-2">
             <span class="text-2xl md:text-3xl font-black text-randa-pink tracking-wider border-b-2 border-randa-teal pb-1 px-4 inline-block drop-shadow-md">
                 ✨ رندة الزربا ✨
@@ -70,14 +70,12 @@
         <h2 class="text-3xl font-black mb-2">جاهزة لتحدي اليوم؟</h2>
         <p class="text-gray-400 text-sm mb-6">استماع، حفظ، وممارسة اختياري بكيبورد الكوري ⌨️</p>
         
-        <!-- شاشة عرض الدفعة الحالية والمستوى المحدث ديناميكياً -->
         <div class="bg-randa-card p-5 rounded-3xl border border-randa-teal/30 shadow-neon-teal mb-5 inline-block w-full max-w-xs">
             <span class="text-gray-400 text-xs">أنتِ حالياً في الدفعة:</span>
             <div id="current-batch-display" class="text-5xl font-black text-randa-teal my-1 korean-text">1</div>
             <span id="level-tag-display" class="text-xs text-randa-pink font-bold">🌱 مستوى المبتدئين (TOPIK 1 - L1)</span>
         </div>
 
-        <!-- اختيار المستوى / الانتقال بين المراحل -->
         <div class="bg-randa-card/60 p-4 rounded-2xl border border-gray-800 mb-6 max-w-sm mx-auto text-right">
             <label class="block text-xs text-gray-300 font-bold mb-2 text-center">🎯 القفز السريع لمستوى معين:</label>
             <div class="grid grid-cols-3 gap-2 mb-3">
@@ -113,7 +111,6 @@
             <div id="progress-bar" class="bg-randa-teal h-full transition-all duration-300" style="width: 0%"></div>
         </div>
 
-        <!-- كرت الكلمة أو الجملة -->
         <div id="word-card" class="bg-randa-card p-6 rounded-3xl border border-gray-700 shadow-2xl text-center relative">
             <button onclick="speakKorean()" class="absolute top-4 left-4 bg-gray-800/80 p-3 rounded-2xl text-randa-pink hover:text-white border border-gray-700 active:scale-95 transition-transform">
                 🔊 نطق
@@ -126,7 +123,6 @@
                 <p id="ar-word" class="text-2xl font-bold text-gray-200">مرحباً / السلام عليكم</p>
             </div>
 
-            <!-- خيار كتابة النص بالكيبورد الكوري (اختياري) -->
             <div class="bg-gray-900/40 p-4 rounded-2xl border border-gray-800 text-right">
                 <label for="type-input" class="block text-xs text-gray-400 mb-2 font-bold">
                     ⌨️ جربي اكتبي النص بالكوري (اختياري):
@@ -137,7 +133,6 @@
             </div>
         </div>
 
-        <!-- أزرار التحكم: التالي + العودة للرئيسية -->
         <div class="mt-6 flex flex-col gap-3">
             <button id="next-btn" onclick="nextWord()" class="w-full bg-randa-pink text-randa-dark font-black py-4 rounded-2xl text-lg shadow-neon-pink hover:scale-102 active:scale-95 transition-transform cursor-pointer">
                 التالي ➡️
@@ -179,16 +174,16 @@
         </button>
     </div>
 
-    <!-- 5. شريط طلب تثبيت التطبيق ع الجوال (PWA Banner) -->
+    <!-- 5. شريط طلب تثبيت التطبيق ع الجوال / سطح المكتب (PWA Banner) -->
     <div id="pwa-prompt" class="hidden fixed bottom-4 left-4 right-4 max-w-md mx-auto bg-randa-card border border-randa-pink/50 p-4 rounded-2xl shadow-2xl z-50 flex flex-col gap-3 backdrop-blur-md">
         <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <span class="text-2xl">📱</span>
-                <span class="font-bold text-sm text-white">احفظي التطبيق ع شاشة الجوال!</span>
+                <span class="font-bold text-sm text-white">تثبيت التطبيق على الجهاز!</span>
             </div>
             <button onclick="closePWA()" class="text-gray-400 hover:text-white font-bold p-1 text-sm">✕</button>
         </div>
-        <p class="text-xs text-gray-300">عشان تفتحيه بلمسة وحدة وتدربي بأي وقت بدون ما تضيعي الرابط 🌸</p>
+        <p class="text-xs text-gray-300">اضغطي لتثبيته كتطبيق مستقل على سطح المكتب أو الجوال 🌸</p>
         <button id="pwa-btn" onclick="installPWA()" class="w-full bg-randa-teal text-randa-dark font-black py-2.5 rounded-xl text-sm shadow-neon-teal hover:scale-102 active:scale-95 transition-transform cursor-pointer">
             تثبيت التطبيق الآن 📲
         </button>
@@ -199,9 +194,12 @@
         let currentBatch = 1;
         let wordsInCurrentBatch = [];
         let currentWordIndex = 0;
-        let deferredPrompt;
+        let deferredPrompt = null;
 
         window.onload = async function() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW registration failed: ', err));
+            }
             loadProgress();
             await fetchWords();
             checkPWAStatus();
@@ -243,7 +241,7 @@
             updateLevelTag(currentBatch);
         }
 
-        // PWA Installation Handling
+        // PWA Native Installation Handling
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
@@ -253,7 +251,7 @@
         function checkPWAStatus() {
             const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
             if (!isStandalone && !localStorage.getItem('randa_pwa_closed')) {
-                setTimeout(showPWABanner, 1200);
+                setTimeout(showPWABanner, 1000);
             }
         }
 
@@ -274,7 +272,7 @@
                     deferredPrompt = null;
                 });
             } else {
-                alert("عشان تحفظي التطبيق عندك بسهولة:\n\n• للآيفون (Safari): اكبسي زر المشاركة ⎘ بأسفل الشاشة ثم اختر 'إضافة إلى الشاشة الرئيسية ➕'.\n\n• للأندرويد (Chrome): اكبسي الثلاث نقاط ⋮ بأعلى الشاشة ثم اختر 'تثبيت التطبيق' أو 'إضافة إلى الشاشة الرئيسية 📲'.");
+                alert("عشان تحفظي التطبيق عندك بسهولة:\n\n• للآيفون (Safari): اكبسي زر المشاركة ⎘ بأسفل الشاشة ثم اختر 'إضافة إلى الشاشة الرئيسية ➕'.\n\n• للكروم (سطح المكتب أو أندرويد): اكبسي أيقونة الشاشة الصغرى 💾 أو الثلاث نقاط ⋮ بأعلى المتصفح واختاري 'تثبيت التطبيق / Install App'.");
             }
         }
 

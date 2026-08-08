@@ -1,0 +1,24 @@
+{
+  "name": "Korea Randa - رندة لتعليم الكوريه",
+  "short_name": "Korea Randa",
+  "description": "تطبيق تعليم اللغة الكورية - رندة الزربا",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/197/197582.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/197/197582.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
