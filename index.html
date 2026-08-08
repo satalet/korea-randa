@@ -49,6 +49,21 @@
 </head>
 <body class="p-4 md:p-8 max-w-2xl mx-auto min-h-screen flex flex-col justify-between relative pb-24 md:pb-8">
 
+    <!-- 0. شاشة الترحيب عند فتح التطبيق (Splash Screen) -->
+    <div id="welcome-modal" class="fixed inset-0 bg-randa-dark/95 backdrop-blur-md z-[100] flex flex-col items-center justify-center p-4 overflow-y-auto">
+        <div class="w-full max-w-md flex flex-col items-center text-center my-auto">
+            <!-- كرت الصورة المتناسق مع الجوال -->
+            <div class="w-full bg-randa-card rounded-3xl p-2 border-2 border-randa-pink/40 shadow-neon-pink mb-6 overflow-hidden">
+                <img src="welcome.png" alt="أهلاً بكم في موقع رندة الزربا" class="w-full h-auto max-h-[55vh] object-cover rounded-2xl shadow-md">
+            </div>
+
+            <!-- زر دخول المشروع -->
+            <button onclick="enterApp()" class="w-full bg-randa-pink text-randa-dark font-black py-4 rounded-2xl text-xl shadow-neon-pink hover:scale-105 active:scale-95 transition-transform cursor-pointer flex items-center justify-center gap-2">
+                <span>دخول التطبيق</span> 🚀
+            </button>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="flex justify-between items-center pb-4 border-b border-gray-800">
         <h1 class="text-2xl font-black text-randa-pink">Korea <span class="text-white">Randa</span> ✨</h1>
@@ -195,6 +210,10 @@
         let wordsInCurrentBatch = [];
         let currentWordIndex = 0;
         let deferredPrompt = null;
+
+        function enterApp() {
+            document.getElementById('welcome-modal').classList.add('hidden');
+        }
 
         window.onload = async function() {
             if ('serviceWorker' in navigator) {
