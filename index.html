@@ -263,19 +263,18 @@
         }
 
         function installPWA() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        closePWA();
-                    }
-                    deferredPrompt = null;
-                });
-            } else {
-                alert("عشان تحفظي التطبيق عندك بسهولة:\n\n• للآيفون (Safari): اكبسي زر المشاركة ⎘ بأسفل الشاشة ثم اختر 'إضافة إلى الشاشة الرئيسية ➕'.\n\n• للكروم (سطح المكتب أو أندرويد): اكبسي أيقونة الشاشة الصغرى 💾 أو الثلاث نقاط ⋮ بأعلى المتصفح واختاري 'تثبيت التطبيق / Install App'.");
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                closePWA();
             }
-        }
-
+            deferredPrompt = null;
+        });
+    } else {
+        closePWA();
+    }
+}
         function closePWA() {
             document.getElementById('pwa-prompt').classList.add('hidden');
             localStorage.setItem('randa_pwa_closed', 'true');
