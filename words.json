@@ -1,182 +1,92 @@
 [
   {
+    "batch": 1,
     "hangul": "안녕하세요",
     "roman": "Annyeong-haseyo",
-    "arabic": "مرحباً / السلام عليكم",
-    "batch": 1
+    "arabic": "مرحباً / السلام عليكم"
   },
   {
+    "batch": 1,
     "hangul": "감사합니다",
-    "roman": "Gamsahabnida",
-    "arabic": "شكراً لك",
-    "batch": 1
+    "roman": "Gam-sa-ham-ni-da",
+    "arabic": "شكراً لك"
   },
   {
+    "batch": 1,
     "hangul": "네",
     "roman": "Ne",
-    "arabic": "نعم",
-    "batch": 1
+    "arabic": "نعم"
   },
   {
+    "batch": 1,
     "hangul": "아니요",
-    "roman": "Aniyo",
-    "arabic": "لا",
-    "batch": 1
+    "roman": "A-ni-yo",
+    "arabic": "لا"
   },
   {
-    "hangul": "죄송합니다",
-    "roman": "Joesonghabnida",
-    "arabic": "آسف / اعتذار",
-    "batch": 1
+    "batch": 21,
+    "hangul": "어디에 가요?",
+    "roman": "Eodie gayo?",
+    "arabic": "إلى أين أنت ذاهب؟"
   },
   {
-    "hangul": "물",
-    "roman": "Mul",
-    "arabic": "ماء",
-    "batch": 2
+    "batch": 21,
+    "hangul": "밥 먹었어요?",
+    "roman": "Bap meogeosseoyo?",
+    "arabic": "هل أكلت؟"
   },
   {
-    "hangul": "밥",
-    "roman": "Bap",
-    "arabic": "أرز / وجبة طعام",
-    "batch": 2
-  },
-  {
-    "hangul": "집",
-    "roman": "Jip",
-    "arabic": "بيت / منزل",
-    "batch": 2
-  },
-  {
-    "hangul": "학교",
-    "roman": "Hakgyo",
-    "arabic": "مدرسة",
-    "batch": 2
-  },
-  {
-    "hangul": "친구",
-    "roman": "Chingu",
-    "arabic": "صديق / صديقة",
-    "batch": 2
-  },
-  {
-    "hangul": "사과",
-    "roman": "Sagwa",
-    "arabic": "تفاحة",
-    "batch": 3
-  },
-  {
-    "hangul": "우유",
-    "roman": "Uyu",
-    "arabic": "حليب",
-    "batch": 3
-  },
-  {
-    "hangul": "고양이",
-    "roman": "Goyangi",
-    "arabic": "قطة",
-    "batch": 3
-  },
-  {
-    "hangul": "강아지",
-    "roman": "Gangaji",
-    "arabic": "كلب صغير",
-    "batch": 3
-  },
-  {
-    "hangul": "책",
-    "roman": "Chaek",
-    "arabic": "كتاب",
-    "batch": 3
-  },
-  {
-    "hangul": "이것은 얼마예요?",
-    "roman": "Igeoseun eolmayeyo?",
-    "arabic": "كم سعر هذا؟",
-    "batch": 21
-  },
-  {
-    "hangul": "화장실이 어디예요?",
-    "roman": "Hwajangsiri eodiyeyo?",
-    "arabic": "أين يقع الحمام؟",
-    "batch": 21
-  },
-  {
-    "hangul": "메뉴판 주세요",
-    "roman": "Menyupan juseyo",
-    "arabic": "اعطني قائمة الطعام لو سمحت",
-    "batch": 21
-  },
-  {
-    "hangul": "맛있어요!",
-    "roman": "Masisseoyo!",
-    "arabic": "هذا الطعام لديد جداً!",
-    "batch": 21
-  },
-  {
-    "hangul": "깎아주세요",
-    "roman": "Kkakkajuseyo",
-    "arabic": "اعطني خصماً في السعر لو سمحت",
-    "batch": 21
-  },
-  {
-    "hangul": "지금 몇 시예요?",
-    "roman": "Jigeum myeot siyeyo?",
-    "arabic": "كم الساعة الآن؟",
-    "batch": 22
-  },
-  {
-    "hangul": "오늘 날씨가 좋아요",
-    "roman": "Oneul nalssiga joayo",
-    "arabic": "الطقس جميل هذا اليوم",
-    "batch": 22
-  },
-  {
-    "hangul": "지하철역이 어디예요?",
-    "roman": "Jihacheol-yeogi eodiyeyo?",
-    "arabic": "أين تقع محطة القطار؟",
-    "batch": 22
-  },
-  {
-    "hangul": "내일 만나요",
-    "roman": "Naeil mannayo",
-    "arabic": "نتقابل غداً",
-    "batch": 22
-  },
-  {
-    "hangul": "도와주세요",
-    "roman": "Dowajuseyo",
-    "arabic": "ساعدني لو سمحت",
-    "batch": 22
-  },
-  {
-    "hangul": "한국어를 공부하는 것이 재미있어요",
-    "roman": "Hangugoreul gongbuhaneun geosi jaemiisseoyo",
-    "arabic": "تعلم اللغة الكورية ممتع جداً",
-    "batch": 51
-  },
-  {
-    "hangul": "주말에 뭐 할 거예요?",
-    "roman": "Jumare mwo hal geoyeyo?",
-    "arabic": "ماذا ستفعل في عطلة نهاية الأسبوع؟",
-    "batch": 51
-  },
-  {
+    "batch": 51,
     "hangul": "걱정하지 마세요, 잘 될 거예요",
     "roman": "Geokjeonghaji maseyo, jal doel geoyeyo",
-    "arabic": "لا تقلق، كل شيء سيكون على ما يرام",
-    "batch": 51
+    "arabic": "لا تقلق، كل شيء سيكون على ما يرام"
   },
   {
+    "batch": 51,
     "hangul": "시간이 있으면 같이 가요",
     "roman": "Sigani isseumyeon gathi gayo",
-    "arabic": "إذا كان لديك وقت لنذهب معاً",
-    "batch": 51
+    "arabic": "إذا كان لديك وقت لنذهب معاً"
   },
   {
+    "batch": 51,
     "hangul": "다시 한번 설명해 주시겠어요?",
     "roman": "Dasi hanbeon seolmyeonghae jusigesseoyo?",
-    "arabic": "هل يمكنك إعادة الشرح مرة أخرى؟",
-    "batch": 51
+    "arabic": "هل يمكنك إعادة الشرح مرة أخرى؟"
+  },
+  {
+    "batch": 81,
+    "hangul": "처음 뵙겠습니다. 잘 부탁드립니다.",
+    "roman": "Cheo-eum boep-get-seum-ni-da. Jal bu-tak-deu-rim-ni-da.",
+    "arabic": "تشرفنا بلقائك لأول مرة، أتطلع للعمل معك بحرص."
+  },
+  {
+    "batch": 81,
+    "hangul": "말씀하신 내용을 정확히 이해했습니다.",
+    "roman": "Mal-sseum-ha-sin nae-yong-eul jeong-hwak-hi i-hae-haet-seum-ni-da.",
+    "arabic": "فهمت تماماً وبدقة كل ما تفضلت بقوله."
+  },
+  {
+    "batch": 81,
+    "hangul": "도움을 주셔서 진심으로 감사드립니다.",
+    "roman": "Do-um-eul ju-syeo-seo jin-sim-eu-ro gam-sa-deu-rim-ni-da.",
+    "arabic": "أتقدم لك بخالص الشكر والامتنان على مساعدتك."
+  },
+  {
+    "batch": 81,
+    "hangul": "오늘 회의는 이것으로 마치겠습니다.",
+    "roman": "O-neul hoi-ui-neun i-geot-eu-ro ma-chi-get-seum-ni-da.",
+    "arabic": "بهذا نكون قد أنهينا اجتماع اليوم."
+  },
+  {
+    "batch": 81,
+    "hangul": "궁금한 점이 있으시면 언제든 말씀해 주세요.",
+    "roman": "Gung-geum-han jeom-i it-seu-si-myeon eon-je-deun mal-sseum-hae ju-se-yo.",
+    "arabic": "إذا كان لديك أي استفسار، يُرجى إخباري في أي وقت."
+  },
+  {
+    "batch": 81,
+    "hangul": "좋은 성과를 거두시길 바랍니다.",
+    "roman": "Jo-eun seong-gwa-reul geo-du-si-gil ba-ram-ni-da.",
+    "arabic": "أتمنى لك تحقيق نتائج ممتازة ونجاحاً باهراً."
   }
 ]
