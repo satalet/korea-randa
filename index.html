@@ -41,23 +41,36 @@
         }
     </script>
     <style>
-        body { font-family: 'Cairo', sans-serif; background-color: #0f172a; color: white; touch-action: manipulation; }
+        body { font-family: 'Cairo', sans-serif; background-color: #0f172a; color: white; touch-action: manipulation; margin: 0; padding: 0; }
         .korean-text { font-family: 'Noto Sans KR', sans-serif; }
+
+        #welcome-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: rgba(15, 23, 42, 0.96);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 1rem; box-sizing: border-box;
+        }
+        #welcome-modal.hidden { display: none !important; }
+        #welcome-modal img {
+            width: 100%; max-width: 420px; max-height: 50vh;
+            object-fit: contain; border-radius: 1rem; display: block; margin: 0 auto;
+        }
+
         @keyframes pulseSuccess { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
         .success-anim { animation: pulseSuccess 0.4s ease-in-out; }
     </style>
 </head>
 <body class="p-4 md:p-8 max-w-2xl mx-auto min-h-screen flex flex-col justify-between relative pb-24 md:pb-8">
 
-    <!-- 0. شاشة الترحيب عند فتح التطبيق (Splash Screen) -->
+    <!-- 0. شاشة الترحيب عند فتح التطبيق -->
     <div id="welcome-modal" class="fixed inset-0 bg-randa-dark/95 backdrop-blur-md z-[100] flex flex-col items-center justify-center p-4 overflow-y-auto">
         <div class="w-full max-w-md flex flex-col items-center text-center my-auto">
-            <!-- كرت الصورة المتناسق مع الجوال -->
             <div class="w-full bg-randa-card rounded-3xl p-2 border-2 border-randa-pink/40 shadow-neon-pink mb-6 overflow-hidden">
                 <img src="welcome.png" alt="أهلاً بكم في موقع رندة الزربا" class="w-full h-auto max-h-[55vh] object-cover rounded-2xl shadow-md">
             </div>
-
-            <!-- زر دخول المشروع -->
             <button onclick="enterApp()" class="w-full bg-randa-pink text-randa-dark font-black py-4 rounded-2xl text-xl shadow-neon-pink hover:scale-105 active:scale-95 transition-transform cursor-pointer flex items-center justify-center gap-2">
                 <span>دخول التطبيق</span> 🚀
             </button>
@@ -83,7 +96,7 @@
 
         <div class="text-6xl mb-3 mt-1">🇰🇷</div>
         <h2 class="text-3xl font-black mb-2">جاهزة لتحدي اليوم؟</h2>
-        <p class="text-gray-400 text-sm mb-6">استماع، حفظ، وممارسة اختياري بكيبورد الكوري ⌨️</p>
+        <p class="text-gray-400 text-sm mb-6">استماع، حفظ، تقييم النطق 🎙️، وممارسة بالكيبورد ⌨️</p>
         
         <div class="bg-randa-card p-5 rounded-3xl border border-randa-teal/30 shadow-neon-teal mb-5 inline-block w-full max-w-xs">
             <span class="text-gray-400 text-xs">أنتِ حالياً في الدفعة:</span>
@@ -92,20 +105,25 @@
         </div>
 
         <div class="bg-randa-card/60 p-4 rounded-2xl border border-gray-800 mb-6 max-w-sm mx-auto text-right">
-            <label class="block text-xs text-gray-300 font-bold mb-2 text-center">🎯 القفز السريع لمستوى معين:</label>
-            <div class="grid grid-cols-3 gap-2 mb-3">
+            <label class="block text-xs text-gray-300 font-bold mb-2 text-center">🎯 الانتقال المباشر للمستويات والمراحل:</label>
+            <div class="grid grid-cols-2 gap-2 mb-2">
                 <button onclick="selectLevel(1)" class="bg-randa-dark hover:border-randa-pink text-xs border border-gray-700 py-2 rounded-xl text-gray-200 font-bold active:scale-95 transition-all">
-                    🌱 المبتدئ (1)
+                    🌱 المبتدئ (دفعة 1)
                 </button>
                 <button onclick="selectLevel(21)" class="bg-randa-dark hover:border-randa-teal text-xs border border-gray-700 py-2 rounded-xl text-gray-200 font-bold active:scale-95 transition-all">
-                    🌿 المتوسط (21)
+                    🌿 المتوسط (دفعة 21)
                 </button>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mb-3">
                 <button onclick="selectLevel(51)" class="bg-randa-dark hover:border-randa-green text-xs border border-gray-700 py-2 rounded-xl text-gray-200 font-bold active:scale-95 transition-all">
-                    🌳 المتقدم (51)
+                    🌳 المتقدم (دفعة 51)
+                </button>
+                <button onclick="selectLevel(81)" class="bg-randa-pink/20 border-2 border-randa-pink text-xs text-randa-pink py-2 rounded-xl font-black active:scale-95 transition-all shadow-neon-pink">
+                    🎙️ المرحلة 4: نطق ومحادثات (81)
                 </button>
             </div>
             <div class="flex items-center justify-center gap-2 text-xs pt-2 border-t border-gray-800/80">
-                <span class="text-gray-400">أو انتقلي فوراً لدفعة رقم:</span>
+                <span class="text-gray-400">أو أدخلي رقم الدفعة مباشرة:</span>
                 <input type="number" id="custom-batch-input" min="1" max="200" value="1" oninput="setCustomBatch(this.value)" 
                        class="w-20 bg-randa-dark border border-gray-700 rounded-lg px-2 py-1 text-center font-bold text-randa-pink focus:outline-none focus:border-randa-teal">
             </div>
@@ -131,11 +149,20 @@
                 🔊 نطق
             </button>
 
-            <h1 id="ko-word" class="korean-text text-4xl md:text-5xl font-black text-white my-4 tracking-wide leading-relaxed">안녕하세요</h1>
-            <p id="ro-word" class="text-randa-teal font-mono text-base mb-6">[ Annyeong-haseyo ]</p>
+            <h1 id="ko-word" class="korean-text text-3xl md:text-5xl font-black text-white my-4 tracking-wide leading-relaxed">안녕하세요</h1>
+            <p id="ro-word" class="text-randa-teal font-mono text-base mb-4">[ Annyeong-haseyo ]</p>
             
-            <div id="ar-word-container" class="bg-gray-900/60 p-4 rounded-2xl border border-gray-800 mb-6">
-                <p id="ar-word" class="text-2xl font-bold text-gray-200">مرحباً / السلام عليكم</p>
+            <div id="ar-word-container" class="bg-gray-900/60 p-4 rounded-2xl border border-gray-800 mb-4">
+                <p id="ar-word" class="text-xl md:text-2xl font-bold text-gray-200">مرحباً / السلام عليكم</p>
+            </div>
+
+            <!-- زر التقييم الصوتي (المايك) -->
+            <div class="mb-4">
+                <button id="mic-btn" onclick="startVoiceRecognition()" class="w-full bg-randa-dark hover:bg-gray-800 text-randa-pink border border-randa-pink/50 font-bold py-3 px-4 rounded-2xl text-sm transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2 shadow-neon-pink">
+                    <span id="mic-icon" class="text-lg">🎤</span>
+                    <span id="mic-text">اضغطي واحكي الجملة بصوتك لاختبار النطق</span>
+                </button>
+                <p id="speech-result" class="text-xs font-bold mt-2 text-center min-h-[1.25rem]"></p>
             </div>
 
             <div class="bg-gray-900/40 p-4 rounded-2xl border border-gray-800 text-right">
@@ -163,7 +190,7 @@
         <div class="text-center mb-6">
             <span class="bg-randa-pink/20 text-randa-pink px-3 py-1 rounded-full text-xs font-bold">الاختبار النهائي للدفعة 📝</span>
             <h2 class="text-2xl font-bold mt-2">ما هو المعنى الصحيح؟</h2>
-            <h1 id="quiz-ko-word" class="korean-text text-4xl md:text-5xl font-black text-randa-teal my-4 leading-relaxed">밥</h1>
+            <h1 id="quiz-ko-word" class="korean-text text-3xl md:text-5xl font-black text-randa-teal my-4 leading-relaxed">밥</h1>
         </div>
 
         <div id="quiz-options" class="grid grid-cols-1 gap-3 mb-6"></div>
@@ -189,7 +216,7 @@
         </button>
     </div>
 
-    <!-- 5. شريط طلب تثبيت التطبيق (PWA Banner) -->
+    <!-- 5. شريط طلب تثبيت التطبيق -->
     <div id="pwa-prompt" class="hidden fixed bottom-4 left-4 right-4 max-w-md mx-auto bg-randa-card border border-randa-pink/50 p-4 rounded-2xl shadow-2xl z-50 flex flex-col gap-3 backdrop-blur-md">
         <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
@@ -210,6 +237,7 @@
         let wordsInCurrentBatch = [];
         let currentWordIndex = 0;
         let deferredPrompt = null;
+        let recognition = null;
 
         function enterApp() {
             document.getElementById('welcome-modal').classList.add('hidden');
@@ -219,9 +247,68 @@
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW registration failed: ', err));
             }
+            initSpeechRecognition();
             loadProgress();
             await fetchWords();
             checkPWAStatus();
+        }
+
+        // إعداد تقنية التعرف الصوتي للكورية
+        function initSpeechRecognition() {
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                recognition = new SpeechRecognition();
+                recognition.lang = 'ko-KR';
+                recognition.continuous = false;
+                recognition.interimResults = false;
+
+                recognition.onstart = function() {
+                    document.getElementById('mic-icon').innerText = '🔴';
+                    document.getElementById('mic-text').innerText = 'عم أسمعك الآن... احكي بالكوري!';
+                    document.getElementById('speech-result').innerHTML = `<span class="text-randa-teal">جاري الاستماع... 🎙️</span>`;
+                };
+
+                recognition.onresult = function(event) {
+                    const spokenText = event.results[0][0].transcript.trim().replace(/\s+/g, '');
+                    const targetWord = wordsInCurrentBatch[currentWordIndex].hangul.trim().replace(/\s+/g, '');
+                    
+                    resetMicButton();
+
+                    if (spokenText === targetWord || spokenText.includes(targetWord) || targetWord.includes(spokenText)) {
+                        document.getElementById('speech-result').innerHTML = `<span class="text-randa-green font-bold">✨ نطقك ممتاز 100%! (${event.results[0][0].transcript})</span>`;
+                        document.getElementById('word-card').classList.add('success-anim');
+                        setTimeout(()=> document.getElementById('word-card').classList.remove('success-anim'), 500);
+                    } else {
+                        document.getElementById('speech-result').innerHTML = `<span class="text-randa-pink font-bold">سمعتك حكيتي: "${event.results[0][0].transcript}" - جربي عيديها بصوت أوضح!</span>`;
+                    }
+                };
+
+                recognition.onerror = function(event) {
+                    resetMicButton();
+                    document.getElementById('speech-result').innerHTML = `<span class="text-randa-red">ما قدرنا نسمع الصوت بوضوح، جربي مرة ثانية 🎙️</span>`;
+                };
+
+                recognition.onend = function() {
+                    resetMicButton();
+                };
+            }
+        }
+
+        function startVoiceRecognition() {
+            if (recognition) {
+                try {
+                    recognition.start();
+                } catch(e) {
+                    recognition.stop();
+                }
+            } else {
+                alert("متصفحك ما بيمتلك ميزة التعرف الصوتي المباشر، جربي افتحيه من متصفح Chrome على الجوال.");
+            }
+        }
+
+        function resetMicButton() {
+            document.getElementById('mic-icon').innerText = '🎤';
+            document.getElementById('mic-text').innerText = 'اضغطي واحكي الجملة بصوتك لاختبار النطق';
         }
 
         function updateLevelTag(batchNum) {
@@ -234,9 +321,12 @@
             } else if (batchNum <= 50) {
                 tag.innerText = "🌿 مستوى المتوسط - جمل ومحادثات (TOPIK 1 - L2)";
                 tag.className = "text-xs text-randa-teal font-bold";
-            } else {
+            } else if (batchNum <= 80) {
                 tag.innerText = "🌳 مستوى المتقدم - قواعد ومفردات TOPIK 2";
                 tag.className = "text-xs text-randa-green font-bold";
+            } else {
+                tag.innerText = "🎙️ المرحلة 4 المتقدمة - محادثات ونطق تفاعلي";
+                tag.className = "text-xs text-randa-pink font-bold";
             }
         }
 
@@ -260,7 +350,6 @@
             updateLevelTag(currentBatch);
         }
 
-        // PWA Native Installation Handling
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
@@ -345,6 +434,8 @@
             
             document.getElementById('type-input').value = '';
             document.getElementById('feedback-msg').innerText = '';
+            document.getElementById('speech-result').innerText = '';
+            resetMicButton();
 
             const progressPercent = ((currentWordIndex + 1) / wordsInCurrentBatch.length) * 100;
             document.getElementById('progress-bar').style.width = `${progressPercent}%`;
